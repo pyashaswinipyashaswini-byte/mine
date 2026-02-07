@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mii Kosam❤️</title>
+
+<style>
+body{
+    margin:0;
+    background: linear-gradient(135deg,#ff4b7d,#ff9ac6);
+    font-family: 'Segoe UI', cursive;
+    overflow:hidden;
+    color:white;
+    text-align:center;
+}
+
+/* screens */
+.screen{
+    display:none;
+    height:100vh;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    padding:20px;
+}
+
+.active{display:flex;}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    font-size:18px;
+    background:white;
+    color:#ff4b7d;
+    cursor:pointer;
+    margin-top:20px;
+}
+
+h1,h2,p{
+    animation:fade 2s;
+}
+
+@keyframes fade{
+from{opacity:0}
+to{opacity:1}
+}
+
+/* floating hearts */
+.heart{
+    position:absolute;
+    font-size:20px;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);opacity:1}
+100%{transform:translateY(-10vh);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="music" src="mysong.mp3" loop></audio>
+
+<!-- SCREEN 1 -->
+<div class="screen active" id="s1">
+<h1>Oye Abbayi Garu❤️</h1>
+<p>Mee peru Enter cheyyandi</p>
+<input id="name" placeholder="Your name">
+<button onclick="start()">Start Surprise</button>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen" id="s2">
+<h1 id="typing"></h1>
+</div>
+
+<!-- SCREEN 3 -->
+<div class="screen" id="s3">
+<h1 id="reason"></h1>
+</div>
+
+<!-- SCREEN 4 -->
+<div class="screen" id="s4">
+<h1>Click below 💌</h1>
+<button onclick="letter()">Open Secret Letter</button>
+</div>
+
+<!-- SCREEN 5 -->
+<div class="screen" id="s5">
+<h2>
+  My dear Mogudu Garu Ninu Ippudu konni Vatiki Thanku cheptha vinandi ok na!,<br><br>
+Meru naa life loki vachake naku asal life ante enti ani thelisindi daniki Thank you and Love you.<br><br>
+Ee 4years lo nannu nannula istapadi nannu baristhu unnandhuku ikapai life mottam baristhunnandhuku Thank you ,<br>
+And ninnu ekkuva bayaette alochana ninu vadilesi veltha emo ani Abbayi Garu mimlni vadiledi nin chanipoyinake appativaruku miru nannu barinchalsinde,<br>
+Nuvve naa past present and Future kuda Understand LOVE YOU SOOO MUCH  ABBAYI GARU❤️
+</h2>
+<button onclick="proposal()">Next Surprise</button>
+</div>
+
+<!-- SCREEN 6 -->
+<div class="screen" id="s6">
+<h1>Eppatiki nathone untava?💍</h1>
+<button onclick="final()">YES ❤️</button>
+</div>
+
+<!-- SCREEN 7 -->
+<div class="screen" id="s7">
+<h1>Happy Valentine’s Day Abbayi Garu❤️</h1>
+<h2>I Love You So Much Andi💕</h2>
+</div>
+
+
+<script>
+let music=document.getElementById("music")
+
+function show(id){
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"))
+document.getElementById(id).classList.add("active")
+}
+
+function start(){
+let n=document.getElementById("name").value
+music.play()
+
+let text="Enthago istapade Nii Ammayi ❤️"
+let i=0
+show("s2")
+
+let t=setInterval(()=>{
+document.getElementById("typing").innerHTML=text.slice(0,i++)
+if(i>text.length){
+clearInterval(t)
+setTimeout(reasons,2000)
+}
+},50)
+}
+
+/* reasons loop */
+let arr=[
+"Promises 😊",
+"1.I will be Your Future",
+"2.I try to be more Understanding of you💕",
+"3.I never want to loose you",
+"4.Nii prathi situation lo thodunta ❤️",
+
+]
+
+function reasons(){
+show("s3")
+let i=0
+setInterval(()=>{
+document.getElementById("reason").innerHTML=arr[i%arr.length]
+i++
+},2000)
+
+setTimeout(()=>show("s4"),10000)
+}
+
+function letter(){show("s5")}
+function proposal(){show("s6")}
+function final(){
+show("s7")
+setInterval(hearts,300)
+}
+
+/* floating hearts */
+function hearts(){
+let h=document.createElement("div")
+h.className="heart"
+h.innerHTML="❤️"
+h.style.left=Math.random()*100+"vw"
+document.body.appendChild(h)
+setTimeout(()=>h.remove(),6000)
+}
+</script>
+
+</body>
+</html>
