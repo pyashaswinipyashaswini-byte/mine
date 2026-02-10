@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Our Love Story ❤️</title>
+<title> For my Abbayi Garu ❤️</title>
 
 <style>
 body{
@@ -10,45 +10,42 @@ body{
     overflow:hidden;
     color:white;
     text-align:center;
-    background:linear-gradient(45deg,#ff4d6d,#ff758f,#ff8fa3,#ffc2d1);
+    background:black;
 }
 
-/* slides */
-.slide{
-    width:100vw;
-    height:100vh;
-    display:none;
-    padding-top:80px;
+/* scenes */
+.scene{
+    position:absolute;
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    transition:opacity 2s;
 }
 
-.active{
-    display:block;
+.show{
+    opacity:1;
 }
 
 /* images */
-.slide img{
-    width:240px;
-    height:280px;
+.scene img{
+    width:260px;
+    height:300px;
     border-radius:20px;
-    box-shadow:0 0 25px white;
+    box-shadow:0 0 30px white;
     margin:20px;
 }
 
-/* buttons */
-button{
-    padding:10px 18px;
+/* start button */
+#startBtn{
+    padding:18px 35px;
+    font-size:22px;
     border:none;
-    border-radius:10px;
-    font-size:16px;
-    margin:8px;
+    border-radius:15px;
     cursor:pointer;
-}
-
-/* nav */
-.nav{
-    position:fixed;
-    bottom:25px;
-    width:100%;
 }
 
 /* floating hearts */
@@ -58,119 +55,111 @@ button{
 }
 
 @keyframes float{
-    0%{transform:translateY(100vh);}
-    100%{transform:translateY(-10vh);}
+    0%{transform:translateY(100vh); opacity:1;}
+    100%{transform:translateY(-10vh); opacity:0;}
+}
+
+/* typing text */
+.type{
+    font-size:24px;
+    width:80%;
 }
 </style>
 </head>
 
-<body onclick="startMusicOnce()">
+<body>
 
-<!-- 🎵 MUSIC BUTTON -->
-<button onclick="toggleMusic()" style="position:fixed;top:10px;right:10px;">
-🎵 Play / Pause
-</button>
-
+<!-- 🎵 MUSIC -->
 <audio id="song" loop>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 
-<!-- ❤️ SLIDE 1 -->
-<div class="slide active">
-    <h1>Happy Valentine Week My Love ❤️</h1>
-    <h2>Tap anywhere to start music 🎵</h2>
+<!-- ❤️ START SCREEN -->
+<div class="scene show" id="scene0">
+    <h1>🎬 Naa abbayiiiii 🎬</h1>
+    <button id="startBtn" onclick="startMovie()">Start Our Love Story ❤️</button>
 </div>
 
 
-<!-- ❤️ SLIDE 2 -->
-<div class="slide">
-    <h2>🌹 Rose Day</h2>
+<!-- ❤️ SCENE 1 -->
+<div class="scene" id="scene1">
+    <h1 class="type" id="text1"></h1>
+</div>
+
+
+<!-- ❤️ SCENE 2 -->
+<div class="scene" id="scene2">
     <img src="photo1.jpg">
-    <p>You are the most beautiful flower in my life ❤️</p>
+    <h2>🌹 You are the most beautiful part of my life</h2>
 </div>
 
 
-<!-- ❤️ SLIDE 3 -->
-<div class="slide">
-    <h2>🍫 Chocolate Day</h2>
+<!-- ❤️ SCENE 3 -->
+<div class="scene" id="scene3">
     <img src="photo2.jpg">
-    <p>You make my life sweeter than chocolate ❤️</p>
+    <h2>🍫 Every moment with you is sweet like chocolate</h2>
 </div>
 
 
-<!-- ❤️ SLIDE 4 -->
-<div class="slide">
-    <h2>💌 Promise Day</h2>
+<!-- ❤️ SCENE 4 -->
+<div class="scene" id="scene4">
     <img src="photo3.jpg">
-    <p>I promise to love you forever ❤️</p>
+    <h2>💌Nannu baristhunnandhuku Chala chala love you soo much abbayi garu</h2>
 </div>
 
 
-<!-- ❤️ FINAL -->
-<div class="slide">
-    <h1>❤️ Final Message ❤️</h1>
-    <p style="font-size:22px;">
-    Even though we are miles apart,<br>
-    my heart is always with you.<br><br>
-    I Love You Forever 💖
-    </p>
-</div>
-
-
-
-<!-- NAVIGATION -->
-<div class="nav">
-    <button onclick="prev()">⬅ Previous</button>
-    <button onclick="next()">Next ➡</button>
+<!-- ❤️ FINAL SCENE -->
+<div class="scene" id="scene5">
+    <h1>
+    I Love You Forever ❤️<br><br>
+    Happy Valentine Day Abbayi Garu 💕
+    </h1>
 </div>
 
 
 
 <script>
-/* ---------------- MUSIC FIX ---------------- */
+let song=document.getElementById("song");
 
-let musicStarted = false;
-let song = document.getElementById("song");
-
-/* autoplay after FIRST click anywhere */
-function startMusicOnce(){
-    if(!musicStarted){
-        song.play();
-        musicStarted = true;
-    }
+/* -------- START MOVIE + MUSIC -------- */
+function startMovie(){
+    song.play();   // guaranteed music
+    nextScene(1);
+    typeText();
+    autoPlay();
 }
 
-/* play/pause button */
-function toggleMusic(){
-    if(song.paused) song.play();
-    else song.pause();
+/* -------- SCENE CONTROL -------- */
+function nextScene(n){
+    document.querySelectorAll(".scene").forEach(s=>s.classList.remove("show"));
+    document.getElementById("scene"+n).classList.add("show");
 }
 
-
-/* ---------------- SLIDES ---------------- */
-
-let slides=document.querySelectorAll(".slide");
-let index=0;
-
-function showSlide(i){
-    slides.forEach(s=>s.classList.remove("active"));
-    slides[i].classList.add("active");
+/* auto slideshow */
+function autoPlay(){
+    let s=2;
+    setInterval(()=>{
+        nextScene(s);
+        s++;
+        if(s>5) s=5;
+    },4000);
 }
 
-function next(){
-    index=(index+1)%slides.length;
-    showSlide(index);
+/* typing effect */
+function typeText(){
+    let text="Happy Valentine Week ❤️ Every day with you feels magical...";
+    let i=0;
+    let el=document.getElementById("text1");
+
+    let t=setInterval(()=>{
+        el.innerHTML+=text[i];
+        i++;
+        if(i>=text.length) clearInterval(t);
+    },50);
 }
 
-function prev(){
-    index=(index-1+slides.length)%slides.length;
-    showSlide(index);
-}
-
-
-/* ---------------- FLOATING HEARTS ---------------- */
-
+/* floating hearts */
 setInterval(()=>{
     let h=document.createElement("div");
     h.className="heart";
@@ -180,14 +169,9 @@ setInterval(()=>{
     document.body.appendChild(h);
     setTimeout(()=>h.remove(),6000);
 },300);
-
 </script>
 
 </body>
 </html>
-
-
-
-
 
 
