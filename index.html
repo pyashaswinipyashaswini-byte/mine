@@ -1,181 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Mii Kosam❤️</title>
+    <title>Our Valentine Week ❤️</title>
 
-<style>
-body{
-    margin:0;
-    background: linear-gradient(135deg,#ff4b7d,#ff9ac6);
-    font-family: 'Segoe UI', cursive;
-    overflow:hidden;
-    color:white;
-    text-align:center;
-}
+    <style>
+        body{
+            margin:0;
+            font-family: Arial, sans-serif;
+            text-align:center;
+            color:white;
 
-/* screens */
-.screen{
-    display:none;
-    height:100vh;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    padding:20px;
-}
+            background: linear-gradient(45deg,#ff4d6d,#ff758f,#ff8fa3,#ffc2d1);
+            background-size:400% 400%;
+            animation:bg 10s infinite;
+        }
 
-.active{display:flex;}
+        @keyframes bg{
+            0%{background-position:0% 50%;}
+            50%{background-position:100% 50%;}
+            100%{background-position:0% 50%;}
+        }
 
-button{
-    padding:12px 25px;
-    border:none;
-    border-radius:30px;
-    font-size:18px;
-    background:white;
-    color:#ff4b7d;
-    cursor:pointer;
-    margin-top:20px;
-}
+        h1{
+            margin-top:30px;
+            font-size:40px;
+        }
 
-h1,h2,p{
-    animation:fade 2s;
-}
+        .week{
+            font-size:20px;
+            margin:20px;
+            line-height:35px;
+        }
 
-@keyframes fade{
-from{opacity:0}
-to{opacity:1}
-}
+        .gallery img{
+            width:220px;
+            height:260px;
+            margin:12px;
+            border-radius:20px;
+            box-shadow:0 0 15px white;
+            transition:0.3s;
+        }
 
-/* floating hearts */
-.heart{
-    position:absolute;
-    font-size:20px;
-    animation:float 6s linear infinite;
-}
+        .gallery img:hover{
+            transform:scale(1.08);
+        }
 
-@keyframes float{
-0%{transform:translateY(100vh);opacity:1}
-100%{transform:translateY(-10vh);opacity:0}
-}
-</style>
+        button{
+            padding:12px 25px;
+            font-size:18px;
+            border:none;
+            border-radius:10px;
+            background:white;
+            cursor:pointer;
+            margin:15px;
+        }
+    </style>
 </head>
 
 <body>
 
+<h1>Happy Valentine Week my Mogudu garu ❤️</h1>
+
+<button onclick="playMusic()">🎵 Play Our Song</button>
+
 <!-- MUSIC -->
-<audio id="music" src="mysong.mp3" loop></audio>
-
-<!-- SCREEN 1 -->
-<div class="screen active" id="s1">
-<h1>Oye Abbayi Garu❤️</h1>
-<p>Mee peru Enter cheyyandi</p>
-<input id="name" placeholder="Your name">
-<button onclick="start()">Start Surprise</button>
-</div>
-
-<!-- SCREEN 2 -->
-<div class="screen" id="s2">
-<h1 id="typing"></h1>
-</div>
-
-<!-- SCREEN 3 -->
-<div class="screen" id="s3">
-<h1 id="reason"></h1>
-</div>
-
-<!-- SCREEN 4 -->
-<div class="screen" id="s4">
-<h1>Click below 💌</h1>
-<button onclick="letter()">Open Secret Letter</button>
-</div>
-
-<!-- SCREEN 5 -->
-<div class="screen" id="s5">
-<h2>
-  My dear Mogudu Garu Ninu Ippudu konni Vatiki Thanku cheptha vinandi ok na!,<br><br>
-Meru naa life loki vachake naku asal life ante enti ani thelisindi daniki Thank you and Love you.<br><br>
-Ee 4years lo nannu nannula istapadi nannu baristhu unnandhuku ikapai life mottam baristhunnandhuku Thank you ,<br>
-And ninnu ekkuva bayaette alochana ninu vadilesi veltha emo ani Abbayi Garu mimlni vadiledi nin chanipoyinake appativaruku miru nannu barinchalsinde,<br>
-Nuvve naa past present and Future kuda Understand LOVE YOU SOOO MUCH  ABBAYI GARU❤️
-</h2>
-<button onclick="proposal()">Next Surprise</button>
-</div>
-
-<!-- SCREEN 6 -->
-<div class="screen" id="s6">
-<h1>Eppatiki nathone untava?💍</h1>
-<button onclick="final()">YES ❤️</button>
-</div>
-
-<!-- SCREEN 7 -->
-<div class="screen" id="s7">
-<h1>Happy Valentine’s Day Abbayi Garu❤️</h1>
-<h2>I Love You So Much Andi💕</h2>
-</div>
-
+<audio id="song">
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-let music=document.getElementById("music")
-
-function show(id){
-document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"))
-document.getElementById(id).classList.add("active")
-}
-
-function start(){
-let n=document.getElementById("name").value
-music.play()
-
-let text="Enthago istapade Nii Ammayi ❤️"
-let i=0
-show("s2")
-
-let t=setInterval(()=>{
-document.getElementById("typing").innerHTML=text.slice(0,i++)
-if(i>text.length){
-clearInterval(t)
-setTimeout(reasons,2000)
-}
-},50)
-}
-
-/* reasons loop */
-let arr=[
-"Promises 😊",
-"1.I will be Your Future",
-"2.I try to be more Understanding of you💕",
-"3.I never want to loose you",
-"4.Nii prathi situation lo thodunta ❤️",
-
-]
-
-function reasons(){
-show("s3")
-let i=0
-setInterval(()=>{
-document.getElementById("reason").innerHTML=arr[i%arr.length]
-i++
-},2000)
-
-setTimeout(()=>show("s4"),10000)
-}
-
-function letter(){show("s5")}
-function proposal(){show("s6")}
-function final(){
-show("s7")
-setInterval(hearts,300)
-}
-
-/* floating hearts */
-function hearts(){
-let h=document.createElement("div")
-h.className="heart"
-h.innerHTML="❤️"
-h.style.left=Math.random()*100+"vw"
-document.body.appendChild(h)
-setTimeout(()=>h.remove(),6000)
+function playMusic(){
+    const music = document.getElementById("song");
+    music.play();
 }
 </script>
+
+
+<div class="week">
+    🌹 Rose Day – Rose puvvu entha andanga untundoo nuv natho unte nin antha andanga unta<br>
+    💍 Propose Day – Roju cheppina bore kottani padam "LOVE YOU CHOO MUCH ABBAYI GARU"<br>
+    🍫 Chocolate Day – Sweet like you<br>
+    🧸 Teddy Day – Abbayii ninnu gettiga hug cheskovali ani undi ra<br>
+    💌 Promise Day –Chachina ninnu vadalanu<br>
+    💋 Kiss Day – Missing your kisses<br>
+    ❤️ Valentine’s Day –Love u soo much Abbayi Garu
+</div>
+
+
+<h2>Our Beautiful Memories 💕</h2>
+
+<div class="gallery">
+    <img src="photo1.jpg">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+</div>
+
+<p style="font-size:22px; padding:20px;">
+Nannu baristhunandhuku chala thanks abbayi garu,<br>
+Nannu vadalanandhuku thanks raa ❤️<br>
+Happy Valentine's Day Abbayi Garu
+</p>
 
 </body>
 </html>
