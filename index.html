@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>For My Abbayi Garu ❤️</title>
+<title> FOR MY ABBAYI GARU ❤️</title>
 
 <style>
 body{
@@ -14,28 +15,33 @@ body{
     background:linear-gradient(45deg,#ff4d6d,#ff758f,#ff8fa3,#ffc2d1);
 }
 
-/* floating hearts */
-.heart{
-    position:fixed;
-    font-size:20px;
-    animation:float 6s linear infinite;
-    color:white;
-}
-
-@keyframes float{
-    0%{transform:translateY(100vh);opacity:1;}
-    100%{transform:translateY(-10vh);opacity:0;}
-}
-
+/* heading */
 h1{
     margin-top:25px;
 }
 
-/* gallery */
+/* floating hearts */
+.heart{
+    position:fixed;
+    color:white;
+    font-size:18px;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(100vh);}
+    100%{transform:translateY(-10vh);}
+}
+
+/* photos */
+.gallery{
+    margin-top:20px;
+}
+
 .gallery img{
     width:220px;
     height:260px;
-    margin:15px;
+    margin:12px;
     border-radius:20px;
     box-shadow:0 0 20px white;
     cursor:pointer;
@@ -47,120 +53,113 @@ h1{
 }
 
 /* surprise box */
-.surprise{
+#box{
     display:none;
-    background:rgba(255,255,255,0.15);
+    background:rgba(255,255,255,0.2);
+    margin:25px;
     padding:20px;
-    margin:20px;
     border-radius:15px;
     font-size:20px;
 }
 
 button{
-    padding:10px 20px;
+    padding:10px 18px;
     border:none;
     border-radius:10px;
-    margin-top:10px;
-    font-size:16px;
+    font-size:15px;
+    margin:10px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>Happy Valentine Week Abbayi Garu ❤️</h1>
-<p>Mana okka okka pic nii click cheyyandiiii  🎁</p>
+<h1>Happy Valentine Week Mogudu Garu❤️</h1>
+<p> Edoo Okka photo click cheyyandiiiiii 🎁</p>
 
 <button onclick="playMusic()">🎵 Play Our Song</button>
 
-<audio id="music">
-  <source src="mysong.mp3" type="audio/mpeg">
-</audio>
-
+<audio id="song" src="music.mp3"></audio>
 
 
 <!-- PHOTOS -->
 <div class="gallery">
-    <img src="photo1.jpg" onclick="openSurprise(1)">
-    <img src="photo2.jpg" onclick="openSurprise(2)">
-    <img src="photo3.jpg" onclick="openSurprise(3)">
+    <img src="photo1.jpg" onclick="show1()">
+    <img src="photo2.jpg" onclick="show2()">
+    <img src="photo3.jpg" onclick="show3()">
 </div>
 
 
-<!-- SURPRISE 1 -->
-<div id="s1" class="surprise">
-    🌹 Rose Day Surprise <br>
-    Nuvvu naa pakkana unnappudu appude pusina Rose laa feel avvutha "HAPPY ROSE DAY ANDI"  ❤️
-    <br>
-    <button onclick="more1()">Open More 💕</button>
+<!-- SURPRISE BOX -->
+<div id="box">
+    <div id="text"></div>
 
-    <div id="m1" style="display:none">
-        💌 I miss you abbayi garu <br>
-        💖 Love you soo much andii <br>
-        🥰 I want u till my last breath
-    </div>
+    <button onclick="more()">More Love 💕</button>
+
+    <div id="extra" style="display:none; margin-top:10px;"></div>
 </div>
 
 
-<!-- SURPRISE 2 -->
-<div id="s2" class="surprise">
-    🍫 Chocolate Day Surprise <br>
-    Life is sweeter because of you ❤️
-    <br>
-    <button onclick="more2()">Open More 💕</button>
-
-    <div id="m2" style="display:none">
-        😘 Nuvvu natho unte nin chala Happy ga untara <br>
-        💞 Ee Dooramu manalni vidadiyyaledu abbayi <br>
-        💑 You are my Comfort place
-    </div>
-</div>
-
-
-<!-- SURPRISE 3 -->
-<div id="s3" class="surprise">
-    ❤️ Final Valentine Surprise ❤️ <br><br>
-   Chala thanks ra nannu baristhunnandhuku.<br>
-    Nannu vadilei poku raaa.<br><br>
-    💍 I promise to love you forever
-</div>
 
 <script>
+
+/* music */
 function playMusic(){
-   document.getElementById("music").play();
-}
-</script>
+    document.getElementById("song").play();
 }
 
-/* open surprise */
-function openSurprise(num){
- document.getElementById("s1").style.display="none";
- document.getElementById("s2").style.display="none";
- document.getElementById("s3").style.display="none";
 
- document.getElementById("s"+num).style.display="block";
+/* show surprise 1 */
+function show1(){
+    openBox(
+        "🌹 Rose Day Surprise ❤️ You are the most beautiful part of my life",
+        "💌 I miss you everyday <br> 💖Eppatiki nii Danne <br> 🥰 Love u soo much Abbayi"
+    );
 }
 
-/* more buttons */
-function more1(){
- document.getElementById("m1").style.display="block";
+/* show surprise 2 */
+function show2(){
+    openBox(
+        "🍫 Chocolate Day Surprise ❤️ Life is sweeter with you",
+        "😘 Nuvvu natho undara last varuku <br> 💞 Yedaina nuvvunte naku simple ga anipisthunu ninu cheyyagalanu ane confidence isthundi <br> 💑 You are my Comfort Zone"
+    );
 }
 
-function more2(){
- document.getElementById("m2").style.display="block";
+/* show surprise 3 */
+function show3(){
+    openBox(
+        "❤️ Valentine’s Day Special ❤️",
+        "I promise Neenu ninnu chachedaka vadalnu <br> Nithone kadadaka ninnu edipisthu unta <br> Naku nuvvu permanent ga kavali 💍"
+    );
+}
+
+
+/* open common box */
+function openBox(main, extraText){
+    document.getElementById("box").style.display="block";
+    document.getElementById("text").innerHTML=main;
+    document.getElementById("extra").innerHTML=extraText;
+    document.getElementById("extra").style.display="none";
+}
+
+/* more button */
+function more(){
+    document.getElementById("extra").style.display="block";
 }
 
 
 /* floating hearts */
 setInterval(()=>{
- let heart=document.createElement("div");
- heart.className="heart";
- heart.innerHTML="❤️";
- heart.style.left=Math.random()*100+"vw";
- heart.style.fontSize=(15+Math.random()*20)+"px";
- document.body.appendChild(heart);
- setTimeout(()=>heart.remove(),6000);
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(15+Math.random()*20)+"px";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),6000);
 },300);
+
 </script>
 
 </body>
