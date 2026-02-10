@@ -1,105 +1,167 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Our Valentine Week ❤️</title>
+<title>For My Abbayi Garu ❤️</title>
 
-    <style>
-        body{
-            margin:0;
-            font-family: Arial, sans-serif;
-            text-align:center;
-            color:white;
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    text-align:center;
+    color:white;
+    overflow-x:hidden;
 
-            background: linear-gradient(45deg,#ff4d6d,#ff758f,#ff8fa3,#ffc2d1);
-            background-size:400% 400%;
-            animation:bg 10s infinite;
-        }
+    background:linear-gradient(45deg,#ff4d6d,#ff758f,#ff8fa3,#ffc2d1);
+}
 
-        @keyframes bg{
-            0%{background-position:0% 50%;}
-            50%{background-position:100% 50%;}
-            100%{background-position:0% 50%;}
-        }
+/* floating hearts */
+.heart{
+    position:fixed;
+    font-size:20px;
+    animation:float 6s linear infinite;
+    color:white;
+}
 
-        h1{
-            margin-top:30px;
-            font-size:40px;
-        }
+@keyframes float{
+    0%{transform:translateY(100vh);opacity:1;}
+    100%{transform:translateY(-10vh);opacity:0;}
+}
 
-        .week{
-            font-size:20px;
-            margin:20px;
-            line-height:35px;
-        }
+h1{
+    margin-top:25px;
+}
 
-        .gallery img{
-            width:220px;
-            height:260px;
-            margin:12px;
-            border-radius:20px;
-            box-shadow:0 0 15px white;
-            transition:0.3s;
-        }
+/* gallery */
+.gallery img{
+    width:220px;
+    height:260px;
+    margin:15px;
+    border-radius:20px;
+    box-shadow:0 0 20px white;
+    cursor:pointer;
+    transition:0.3s;
+}
 
-        .gallery img:hover{
-            transform:scale(1.08);
-        }
+.gallery img:hover{
+    transform:scale(1.1);
+}
 
-        button{
-            padding:12px 25px;
-            font-size:18px;
-            border:none;
-            border-radius:10px;
-            background:white;
-            cursor:pointer;
-            margin:15px;
-        }
-    </style>
+/* surprise box */
+.surprise{
+    display:none;
+    background:rgba(255,255,255,0.15);
+    padding:20px;
+    margin:20px;
+    border-radius:15px;
+    font-size:20px;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    margin-top:10px;
+    font-size:16px;
+}
+</style>
 </head>
 
 <body>
 
-<h1>Happy Valentine Week my Mogudu garu ❤️</h1>
+<h1>Happy Valentine Week Abbayi Garu ❤️</h1>
+<p>Mana okka okka pic nii click cheyyandiiii  🎁</p>
 
 <button onclick="playMusic()">🎵 Play Our Song</button>
 
-<!-- MUSIC -->
-<audio id="song">
-    <source src="music.mp3" type="audio/mpeg">
+<audio id="music">
+  <source src="mysong.mp3" type="audio/mpeg">
 </audio>
+
+
+
+<!-- PHOTOS -->
+<div class="gallery">
+    <img src="photo1.jpg" onclick="openSurprise(1)">
+    <img src="photo2.jpg" onclick="openSurprise(2)">
+    <img src="photo3.jpg" onclick="openSurprise(3)">
+</div>
+
+
+<!-- SURPRISE 1 -->
+<div id="s1" class="surprise">
+    🌹 Rose Day Surprise <br>
+    Nuvvu naa pakkana unnappudu appude pusina Rose laa feel avvutha "HAPPY ROSE DAY ANDI"  ❤️
+    <br>
+    <button onclick="more1()">Open More 💕</button>
+
+    <div id="m1" style="display:none">
+        💌 I miss you abbayi garu <br>
+        💖 Love you soo much andii <br>
+        🥰 I want u till my last breath
+    </div>
+</div>
+
+
+<!-- SURPRISE 2 -->
+<div id="s2" class="surprise">
+    🍫 Chocolate Day Surprise <br>
+    Life is sweeter because of you ❤️
+    <br>
+    <button onclick="more2()">Open More 💕</button>
+
+    <div id="m2" style="display:none">
+        😘 Nuvvu natho unte nin chala Happy ga untara <br>
+        💞 Ee Dooramu manalni vidadiyyaledu abbayi <br>
+        💑 You are my Comfort place
+    </div>
+</div>
+
+
+<!-- SURPRISE 3 -->
+<div id="s3" class="surprise">
+    ❤️ Final Valentine Surprise ❤️ <br><br>
+   Chala thanks ra nannu baristhunnandhuku.<br>
+    Nannu vadilei poku raaa.<br><br>
+    💍 I promise to love you forever
+</div>
 
 <script>
 function playMusic(){
-    const music = document.getElementById("song");
-    music.play();
+   document.getElementById("music").play();
 }
 </script>
+}
+
+/* open surprise */
+function openSurprise(num){
+ document.getElementById("s1").style.display="none";
+ document.getElementById("s2").style.display="none";
+ document.getElementById("s3").style.display="none";
+
+ document.getElementById("s"+num).style.display="block";
+}
+
+/* more buttons */
+function more1(){
+ document.getElementById("m1").style.display="block";
+}
+
+function more2(){
+ document.getElementById("m2").style.display="block";
+}
 
 
-<div class="week">
-    🌹 Rose Day – Rose puvvu entha andanga untundoo nuv natho unte nin antha andanga unta<br>
-    💍 Propose Day – Roju cheppina bore kottani padam "LOVE YOU CHOO MUCH ABBAYI GARU"<br>
-    🍫 Chocolate Day – Sweet like you<br>
-    🧸 Teddy Day – Abbayii ninnu gettiga hug cheskovali ani undi ra<br>
-    💌 Promise Day –Chachina ninnu vadalanu<br>
-    💋 Kiss Day – Missing your kisses<br>
-    ❤️ Valentine’s Day –Love u soo much Abbayi Garu
-</div>
-
-
-<h2>Our Beautiful Memories 💕</h2>
-
-<div class="gallery">
-    <img src="photo1.jpg">
-    <img src="photo2.jpg">
-    <img src="photo3.jpg">
-</div>
-
-<p style="font-size:22px; padding:20px;">
-Nannu baristhunandhuku chala thanks abbayi garu,<br>
-Nannu vadalanandhuku thanks raa ❤️<br>
-Happy Valentine's Day Abbayi Garu
-</p>
+/* floating hearts */
+setInterval(()=>{
+ let heart=document.createElement("div");
+ heart.className="heart";
+ heart.innerHTML="❤️";
+ heart.style.left=Math.random()*100+"vw";
+ heart.style.fontSize=(15+Math.random()*20)+"px";
+ document.body.appendChild(heart);
+ setTimeout(()=>heart.remove(),6000);
+},300);
+</script>
 
 </body>
 </html>
