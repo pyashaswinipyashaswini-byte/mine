@@ -1,30 +1,59 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-<title> FOR MY ABBAYI GARU ❤️</title>
+<title>Our Love Story ❤️</title>
 
 <style>
 body{
     margin:0;
     font-family:Arial;
-    text-align:center;
+    overflow:hidden;
     color:white;
-    overflow-x:hidden;
-
+    text-align:center;
     background:linear-gradient(45deg,#ff4d6d,#ff758f,#ff8fa3,#ffc2d1);
 }
 
-/* heading */
-h1{
-    margin-top:25px;
+/* slides */
+.slide{
+    width:100vw;
+    height:100vh;
+    display:none;
+    padding-top:80px;
+}
+
+.active{
+    display:block;
+}
+
+/* images */
+.slide img{
+    width:240px;
+    height:280px;
+    border-radius:20px;
+    box-shadow:0 0 25px white;
+    margin:20px;
+}
+
+/* buttons */
+button{
+    padding:10px 18px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    margin:8px;
+    cursor:pointer;
+}
+
+/* nav */
+.nav{
+    position:fixed;
+    bottom:25px;
+    width:100%;
 }
 
 /* floating hearts */
 .heart{
     position:fixed;
-    color:white;
-    font-size:18px;
     animation:float 6s linear infinite;
 }
 
@@ -32,135 +61,133 @@ h1{
     0%{transform:translateY(100vh);}
     100%{transform:translateY(-10vh);}
 }
-
-/* photos */
-.gallery{
-    margin-top:20px;
-}
-
-.gallery img{
-    width:220px;
-    height:260px;
-    margin:12px;
-    border-radius:20px;
-    box-shadow:0 0 20px white;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.gallery img:hover{
-    transform:scale(1.1);
-}
-
-/* surprise box */
-#box{
-    display:none;
-    background:rgba(255,255,255,0.2);
-    margin:25px;
-    padding:20px;
-    border-radius:15px;
-    font-size:20px;
-}
-
-button{
-    padding:10px 18px;
-    border:none;
-    border-radius:10px;
-    font-size:15px;
-    margin:10px;
-}
 </style>
 </head>
 
-<body>
+<body onclick="startMusicOnce()">
 
-<h1>Happy Valentine Week Mogudu Garu❤️</h1>
-<p> Edoo Okka photo click cheyyandiiiiii 🎁</p>
+<!-- 🎵 MUSIC BUTTON -->
+<button onclick="toggleMusic()" style="position:fixed;top:10px;right:10px;">
+🎵 Play / Pause
+</button>
 
-<button onclick="playMusic()">🎵 Play Our Song</button>
+<audio id="song" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-<audio id="song" src="music.mp3"></audio>
 
-
-<!-- PHOTOS -->
-<div class="gallery">
-    <img src="photo1.jpg" onclick="show1()">
-    <img src="photo2.jpg" onclick="show2()">
-    <img src="photo3.jpg" onclick="show3()">
+<!-- ❤️ SLIDE 1 -->
+<div class="slide active">
+    <h1>Happy Valentine Week My Love ❤️</h1>
+    <h2>Tap anywhere to start music 🎵</h2>
 </div>
 
 
-<!-- SURPRISE BOX -->
-<div id="box">
-    <div id="text"></div>
+<!-- ❤️ SLIDE 2 -->
+<div class="slide">
+    <h2>🌹 Rose Day</h2>
+    <img src="photo1.jpg">
+    <p>You are the most beautiful flower in my life ❤️</p>
+</div>
 
-    <button onclick="more()">More Love 💕</button>
 
-    <div id="extra" style="display:none; margin-top:10px;"></div>
+<!-- ❤️ SLIDE 3 -->
+<div class="slide">
+    <h2>🍫 Chocolate Day</h2>
+    <img src="photo2.jpg">
+    <p>You make my life sweeter than chocolate ❤️</p>
+</div>
+
+
+<!-- ❤️ SLIDE 4 -->
+<div class="slide">
+    <h2>💌 Promise Day</h2>
+    <img src="photo3.jpg">
+    <p>I promise to love you forever ❤️</p>
+</div>
+
+
+<!-- ❤️ FINAL -->
+<div class="slide">
+    <h1>❤️ Final Message ❤️</h1>
+    <p style="font-size:22px;">
+    Even though we are miles apart,<br>
+    my heart is always with you.<br><br>
+    I Love You Forever 💖
+    </p>
+</div>
+
+
+
+<!-- NAVIGATION -->
+<div class="nav">
+    <button onclick="prev()">⬅ Previous</button>
+    <button onclick="next()">Next ➡</button>
 </div>
 
 
 
 <script>
+/* ---------------- MUSIC FIX ---------------- */
 
-/* music */
-function playMusic(){
-    document.getElementById("song").play();
+let musicStarted = false;
+let song = document.getElementById("song");
+
+/* autoplay after FIRST click anywhere */
+function startMusicOnce(){
+    if(!musicStarted){
+        song.play();
+        musicStarted = true;
+    }
+}
+
+/* play/pause button */
+function toggleMusic(){
+    if(song.paused) song.play();
+    else song.pause();
 }
 
 
-/* show surprise 1 */
-function show1(){
-    openBox(
-        "🌹 Rose Day Surprise ❤️ You are the most beautiful part of my life",
-        "💌 I miss you everyday <br> 💖Eppatiki nii Danne <br> 🥰 Love u soo much Abbayi"
-    );
+/* ---------------- SLIDES ---------------- */
+
+let slides=document.querySelectorAll(".slide");
+let index=0;
+
+function showSlide(i){
+    slides.forEach(s=>s.classList.remove("active"));
+    slides[i].classList.add("active");
 }
 
-/* show surprise 2 */
-function show2(){
-    openBox(
-        "🍫 Chocolate Day Surprise ❤️ Life is sweeter with you",
-        "😘 Nuvvu natho undara last varuku <br> 💞 Yedaina nuvvunte naku simple ga anipisthunu ninu cheyyagalanu ane confidence isthundi <br> 💑 You are my Comfort Zone"
-    );
+function next(){
+    index=(index+1)%slides.length;
+    showSlide(index);
 }
 
-/* show surprise 3 */
-function show3(){
-    openBox(
-        "❤️ Valentine’s Day Special ❤️",
-        "I promise Neenu ninnu chachedaka vadalnu <br> Nithone kadadaka ninnu edipisthu unta <br> Naku nuvvu permanent ga kavali 💍"
-    );
+function prev(){
+    index=(index-1+slides.length)%slides.length;
+    showSlide(index);
 }
 
 
-/* open common box */
-function openBox(main, extraText){
-    document.getElementById("box").style.display="block";
-    document.getElementById("text").innerHTML=main;
-    document.getElementById("extra").innerHTML=extraText;
-    document.getElementById("extra").style.display="none";
-}
+/* ---------------- FLOATING HEARTS ---------------- */
 
-/* more button */
-function more(){
-    document.getElementById("extra").style.display="block";
-}
-
-
-/* floating hearts */
 setInterval(()=>{
-    let heart=document.createElement("div");
-    heart.className="heart";
-    heart.innerHTML="❤️";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(15+Math.random()*20)+"px";
-    document.body.appendChild(heart);
-
-    setTimeout(()=>heart.remove(),6000);
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(15+Math.random()*25)+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
 },300);
 
 </script>
 
 </body>
 </html>
+
+
+
+
+
+
